@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="CruzJulián" />
+  <title>Pruebas de hipótesis</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="default_presentation_files/reveal.js-3.3.0.1/css/reveal.css"/>
+  <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap" rel="stylesheet"/> 
+  <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"/> 
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="default_presentation_files/reveal.js-3.3.0.1/css/theme/corporate.css" id="theme">
+
+
+  <!-- some tweaks to reveal css 
+
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+  </style> -->
+  <style type="text/css">
+    .reveal .slide-menu-button {
+      left: 105px !important;
+    }
+
+  </style> 
+    <style type="text/css">code{white-space: pre;}</style> 
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+    <link href="default_presentation_files/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+    <link href="default_presentation_files/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+</head>
+<body>
+
+      <img id = "myBackGround" src = "http://cruzjulian.com/backgrounds/046.jpg"/>
+    <div class = "barra-superior">
+    <div class="divTableBody">
+    <div class="divTableRow">
+    <div class="divTableCell">
+      Julián Cruz
+    </div>
+    <div class="divTableCell">
+      <a class="fab fa-linkedin" href = "https://www.linkedin.com/in/cruzjulian/" style = "color: white;" target = "_blank"></a>
+    </div>
+    <div class="divTableCell">
+      <a class="fas fa-envelope" href = "mailto:cruz.julian.mauricio@gmail.com" alt = "cruz.julian.mauricio@gmail.com" style = "color: white;" target = "_blank"></a>
+    </div>
+    <div class="divTableCell">
+      <a class="fab fa-github-square" href="https://github.com/CruzJulian" style = "color: white;" target = "_blank"></a>
+    </div>
+    <div class="divTableCell">
+      Pruebas de hipótesis
+    </div>
+    <div class="divTableCell">
+    <a href = "http://www.fce.unal.edu.co/pec" style = "color: white;" target = "_blank"><img src = "recursos/edu-cont_logo.svg" class = "escudo-unal"></a>
+    </div>
+    <div class="divTableCell">
+      <a href ="http://unal.edu.co/" style = "color: white;" target = "_blank"><img src = "http://unal.edu.co/typo3conf/ext/unal_skin_default/Resources/Public/images/escudoUnal.svg" class = "escudo-unal"></a>
+    </div>
+    </div>
+    </div>
+    </div>
+
+
+  <div class="reveal">
+    <div class="slides">
+
+<section data-background="http://www.cruzjulian.com/backgrounds/001.jpg">
+    <h1 class="title">Pruebas de hipótesis</h1>
+</section>
+
+<section><section id="introducción" class="title-slide slide level1" data-background="http://www.cruzjulian.com/backgrounds/003.jpg"><h1>Introducción</h1></section><section id="pruebas-de-hipótesis" class="slide level2">
+<h2>Pruebas de hipótesis</h2>
+<ul>
+<li>Población-muestra</li>
+<li>Parámetros y estimadores</li>
+<li>Historia</li>
+<li>Hipótesis</li>
+<li>Estadísticos de prueba</li>
+<li>Valor p</li>
+<li>Lógica</li>
+<li>Tipos de error</li>
+<li>Significancia y potencia</li>
+<li>Pruebas de hipótesis</li>
+<li>Conclusiones</li>
+</ul>
+</section><section id="objetivo" class="slide level2">
+<h2>Objetivo</h2>
+<p>Establecer si existe <strong>suficiente evidencia</strong> en la realización de una muestra aleatoria para <strong>rechazar</strong> o <strong>no rechazar</strong> la <strong>hipótesis nula</strong>. ¿Cuál hipótesis explica mejor los datos?</p>
+</section><section id="vancouver" class="slide level2 solo_texto">
+<h2>Vancouver</h2>
+<p>Describir los métodos estadísticos con suficiente detalle, para permitir a un lector conocedor, con acceso a los datos originales, la verificación de los resultados que se presentan. Cuando sea posible, se deben cuantificar los hallazgos y pre- sentarlos con los correspondientes indicadores de los errores de medición e incertidumbre (tales como intervalos de confianza). Evite depender exclusivamente de las pruebas de hipótesis estadísticas, y del uso de valores de P, los que fallan cuando se pretende transmitir información importante acerca de la medida de un efecto.</p>
+</section><section id="bibliografía" class="slide level2">
+<h2>Bibliografía</h2>
+<p><a href="https://www.researchgate.net/publication/7211964_A_farewell_to_P-values">A farewell to p-values</a></p>
+</section></section>
+<section><section id="población-muestra" class="title-slide slide level1" data-background="http://www.cruzjulian.com/backgrounds/019.jpg"><h1>Población muestra</h1></section><section id="paradigma-clásico" class="slide level2">
+<h2>Paradigma clásico</h2>
+<ul>
+<li>Conjuntos pequeños de datos. Datos caros. Eficiencia = uso de menos datos.</li>
+<li>Problema población - muestra. Inferencia estadística. Supuestos distribucionales.</li>
+<li>Relaciones lineales.</li>
+<li>Explicación = Predicción. Hipótesis y pronóstico.</li>
+</ul>
+</section><section id="paradigma-emergente" class="slide level2">
+<h2>Paradigma emergente</h2>
+<ul>
+<li>Conjuntos grandes de datos. Datos baratos. Eficiencia = Eficiencia computacional.</li>
+<li>Problema sesgo - varianza. Sobreajuste. Validación cruzada.</li>
+<li>Relaciones no lineales.</li>
+<li>Explicar o predecir.</li>
+<li>Explicaciones complejas.</li>
+<li>Pronósticos precisos. Inteligencia artificial.</li>
+</ul>
+</section><section id="muestreo" class="slide level2 diferente" data-background="https://media.giphy.com/media/42IEOtbaHuMmIXgAzS/giphy.gif">
+<h2>Muestreo</h2>
+<h3 id="la-validez-de-un-estudio">LA VALIDEZ DE UN ESTUDIO</h3>
+</section><section id="tipos-de-muestreo" class="slide level2">
+<h2>Tipos de muestreo</h2>
+<ul>
+<li>No probabilístico</li>
+<li>Probabilístico</li>
+</ul>
+</section><section id="muestreo-no-probabilístico" class="slide level2">
+<h2>Muestreo no probabilístico</h2>
+<ul>
+<li>No todos los elementos tienen probabilidad de ser seleccionados</li>
+<li>La muestra no es representativa (rigurosamente)</li>
+<li>No es posible calcular el error muestral</li>
+<li>Requiere menos recursos</li>
+</ul>
+</section><section id="muestreo-no-probabilístico-1" class="slide level2">
+<h2>Muestreo no probabilístico</h2>
+<ul>
+<li>Por cuotas</li>
+<li>Bola de nieve</li>
+<li>Discrecional</li>
+<li>Conveniencia</li>
+<li>Accidental</li>
+</ul>
+</section><section id="muestreo-probabilístico" class="slide level2">
+<h2>Muestreo probabilístico</h2>
+<p>Todos los individuos en la población tienen una probabilidad específica de ser seleccionados para la muestra.</p>
+</section><section id="muestreo-probabilístico-1" class="slide level2">
+<h2>Muestreo probabilístico</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/gyGQ_qieVKM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+</section><section id="muestreo-probabilístico-2" class="slide level2">
+<h2>Muestreo probabilístico</h2>
+<ul>
+<li>Muestreo Aleatorio Simple</li>
+<li>Polietápico</li>
+<li>Estratos</li>
+<li>Conglomerados</li>
+</ul>
+</section><section id="representatividad" class="slide level2">
+<h2>Representatividad</h2>
+<p>Una muestra es <strong>representativa</strong> únicamente cuando es obtenida mediante un muestreo probabilístico.</p>
+</section><section id="tamaño-muestral" class="slide level2">
+<h2>Tamaño muestral</h2>
+<p>Corresponde a la mínima cantidad de encuestas que permiten obtener resultados relevantes (generalizables).</p>
+</section><section id="factores-de-expansión" class="slide level2">
+<h2>Factores de expansión</h2>
+<p>Cuando tenemos un diseño muestral, es posible saber cuántos individuos de la población son representados por un individuo de la muestra. Esta cantidad se denomina <em>Factores de expansión</em>.</p>
+<p>Los factores de expansión son particularmente útiles para calcular totales.</p>
+</section></section>
+<section><section id="parámetros-y-estimadores" class="title-slide slide level1" data-background="http://www.cruzjulian.com/backgrounds/013.jpeg"><h1>Parámetros y estimadores</h1></section><section id="parámetro" class="slide level2">
+<h2>Parámetro</h2>
+<p>De manera intuitiva, un parámetro es una medida que resume la información de una población.</p>
+</section><section id="estimador" class="slide level2">
+<h2>Estimador</h2>
+<p>De manera intuitiva un estimador es una medida que resume la información de una muestra.</p>
+</section><section id="ejemplos-de-estimadores" class="slide level2">
+<h2>Ejemplos de estimadores</h2>
+<ul>
+<li>Media, mediana, proporción (muestrales).</li>
+<li>Varianza, rango intercuartílico, desviación estándar, rango (muestrales).</li>
+<li>Histograma.</li>
+</ul>
+</section><section id="consistencia" class="slide level2">
+<h2>Consistencia</h2>
+<p>Bajo ciertas circunstancias, cuando el tamaño muestral crece, el estimador <em>converge</em> al parámetro.</p>
+<ul>
+<li>Debe haber una muestra representativa.</li>
+<li>Elegir el estimador correcto para el parámetro correcto.</li>
+</ul>
+</section><section id="modelo-estadístico" class="slide level2">
+<h2>Modelo estadístico</h2>
+<p>Un modelo estadístico es un conjunto de supuestos matemáticos que se realizan sobre la distribución asociada a un conjunto de datos.</p>
+</section><section id="pongámonos-formales" class="slide level2 diferente" data-background="https://media.giphy.com/media/3oEjI9wxVUUwxTYpBS/giphy.gif">
+<h2>Pongámonos formales</h2>
+<h3 id="comprender-a-fondo-la-teoría-para-llevarla-a-la-práctica">COMPRENDER A FONDO LA TEORÍA PARA LLEVARLA A LA PRÁCTICA</h3>
+</section><section id="familias-paramétricas" class="slide level2">
+<h2>Familias paramétricas</h2>
+<p>Un conjunto de medidas de probabilidad <span class="math inline">\(\{P\}_\theta\)</span> indexado por un <em>parámetro</em> <span class="math inline">\(\theta \in \Theta\)</span> es una <em>familia paramétrica</em> sí y sólo sí <span class="math inline">\(\Theta \subseteq \mathbb{R}^d\)</span> para algún entero positivo <span class="math inline">\(d\)</span>, de manera que <span class="math inline">\(P_\theta\)</span> es conocido cuando <span class="math inline">\(\theta\)</span> es conocido.</p>
+<p>(Shao, 2003, definición 2.1)</p>
+</section><section id="distribución-normal" class="slide level2">
+<h2>Distribución Normal</h2>
+<p>La distribución normal es una familia paramétrica.</p>
+<p><span class="math display">\[ \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{(x - \mu)^2}{2\sigma^2}} \]</span></p>
+<p>puesto que se define completamente con dos parámetros <span class="math inline">\(\mu\)</span> y <span class="math inline">\(\sigma\)</span> como podemos ver <a href="https://www.desmos.com/calculator/2zjv3c3qjn">aquí</a>.</p>
+</section><section id="familia-no-paramétrica" class="slide level2">
+<h2>Familia no paramétrica</h2>
+<p>Una familia de medidas de probabilidad se dice <em>no paramétrica</em> cuando no es paramétrica de acuerdo a la definición de <a href="#/familias-paramétricas">Familias paramétricas</a></p>
+</section><section id="modelo-paramétrico-y-no-paramétrico" class="slide level2">
+<h2>Modelo paramétrico y no paramétrico</h2>
+<p>Un modelo estadístico es paramétrico cuando se asume que la distribución de los datos pertenece a una familia paramétrica. En el caso contrario, se trata de un modelo no paramétrico.</p>
+</section><section id="modelos-paramétricos" class="slide level2">
+<h2>Modelos paramétricos</h2>
+<p>Al tener un modelo paramétrico, <span class="math inline">\(P_\theta\)</span> el problema se reduce a encontrar el parámetro que permita un mejor ajuste a los datos. Esto se puede realizar mediante distintas técnicas.</p>
+<ul>
+<li>Método de los momentos</li>
+<li>Máxima verosimilitud</li>
+<li>Estimación bayesiana</li>
+</ul>
+</section><section id="modelos-no-paramétricos" class="slide level2">
+<h2>Modelos no paramétricos</h2>
+<p>Los modelos no paramétricos realizan sus estimaciones de manera general, sobre el comportamiento de los datos, sin el uso de familias paramétricas. Sin embargo un modelo es un conjunto de supuestos. Algunos supuestos de los modelos no paramétricos son:</p>
+<ul>
+<li>Los datos corresponden a variables de tipo numérico continuo.</li>
+<li>Los datos se sitúan en un espacio métrico.</li>
+<li>La densidad de los datos es derivable.</li>
+</ul>
+</section><section id="pruebas-paramétricas-y-no-paramétricas" class="slide level2">
+<h2>Pruebas paramétricas y no paramétricas</h2>
+<p>Las pruebas paramétricas funcionan en familias paramétricas.</p>
+</section></section>
+<section><section id="historia" class="title-slide slide level1" data-background="http://www.cruzjulian.com/backgrounds/023.jpg"><h1>Historia</h1></section><section id="carl-pearson" class="slide level2">
+<h2>Carl Pearson</h2>
+<p>Propuesta por Carl Pearson <a href="http://www.economics.soton.ac.uk/staff/aldrich/1900.pdf">la prueba <span class="math inline">\(\chi^2\)</span></a> consiste en el cálculo de un estadístico como indicador de dependencia entre variables categóricas.</p>
+<p>También demuestra que este criterio sigue una distribución <span class="math inline">\(\chi^2\)</span>, dando así un criterio de comparabilidad. También un valor <strong>P</strong>, con fórmula propia.</p>
+</section><section id="ronald-fischer" class="slide level2">
+<h2>Ronald Fischer</h2>
+<ul>
+<li>Hipótesis nula.</li>
+<li>Concepto de significancia.</li>
+<li>Región crítica. (obsoleta)</li>
+</ul>
+</section><section id="jerzy-neyman-y-egon-pearson" class="slide level2">
+<h2>Jerzy Neyman y Egon Pearson</h2>
+<ul>
+<li>Hipótesis nula vs hipótesis alterna.</li>
+<li>Error tipo I</li>
+<li>Error tipo II</li>
+<li>Significancia: <span class="math inline">\(\alpha\)</span>.</li>
+<li>Potencia: <span class="math inline">\(1-\beta\)</span>.</li>
+<li>Pruebas uniformemente más potentes.</li>
+<li>Teorema de Neyman Pearson.</li>
+</ul>
+</section></section>
+<section><section id="hipótesis" class="title-slide slide level1" data-background="http://www.cruzjulian.com/backgrounds/025.jpg"><h1>Hipótesis</h1></section><section id="hipótesis-estadística" class="slide level2">
+<h2>Hipótesis estadística</h2>
+<p><strong>Afirmación</strong> acerca de uno o más <strong>parámetros</strong>.</p>
+<ul>
+<li>Hipótesis <strong>simple</strong>: <span class="math inline">\(H:\mu = \mu_0\)</span>.</li>
+<li>Hipótesis <strong>compuesta</strong>: <span class="math inline">\(H:\mu \geq \mu_0\)</span>, <span class="math inline">\(H:\mu \leq \mu_0\)</span>, <span class="math inline">\(H:\mu &gt; \mu_0\)</span>, <span class="math inline">\(H:\mu &lt; \mu_0\)</span>, <span class="math inline">\(H:\mu \neq \mu_0\)</span>.</li>
+<li><span class="math inline">\(\mu_0\)</span> se denomina <strong>valor hipotético</strong>.</li>
+</ul>
+</section><section id="a-priori" class="slide level2">
+<h2>A priori</h2>
+<p>Una hipótesis estadística debe ser establecida antes del análisis de los datos.</p>
+<ul>
+<li><span class="math inline">\(H: \mu = \overline{x}\)</span></li>
+<li><span class="math inline">\(H: X \sim N(\overline{x}, s^2)\)</span></li>
+</ul>
+</section><section id="sistema-de-hipótesis" class="slide level2">
+<h2>Sistema de hipótesis</h2>
+<p><strong>Arreglo de dos hipótesis</strong> denominadas <strong>hipótesis nula</strong> e <strong>hipótesis alternativa</strong>.</p>
+<ul>
+<li><span class="math inline">\(H_0:\mu \leq \mu_0\)</span> frente a <span class="math inline">\(H_1:\mu &gt; \mu_0\)</span>.</li>
+<li><span class="math inline">\(H_0:\mu \geq \mu_0\)</span> frente a <span class="math inline">\(H_1:\mu &lt; \mu_0\)</span>.</li>
+<li><span class="math inline">\(H_0:\mu = \mu_0\)</span> frente a <span class="math inline">\(H_1:\mu \neq \mu_0\)</span>.</li>
+</ul>
+</section><section id="dos-colas" class="slide level2">
+<h2>Dos colas</h2>
+<p><span class="math inline">\(H_0:\mu = \mu_0\)</span> frente a <span class="math inline">\(H_1:\mu \neq \mu_0\)</span>.</p>
+</section><section id="cola-izquierda" class="slide level2">
+<h2>Cola izquierda</h2>
+<p><span class="math inline">\(H_0:\mu = \mu_0\)</span> frente a <span class="math inline">\(H_1:\mu &lt; \mu_0\)</span>.</p>
+</section><section id="cola-derecha" class="slide level2">
+<h2>Cola derecha</h2>
+<p><span class="math inline">\(H_0:\mu = \mu_0\)</span> frente a <span class="math inline">\(H_1:\mu &gt; \mu_0\)</span>.</p>
+</section></section>
+<section><section id="estadísticos-de-prueba" class="title-slide slide level1" data-background="http://www.cruzjulian.com/backgrounds/039.jpg"><h1>Estadísticos de prueba</h1></section><section id="estadísticos-de-prueba-1" class="slide level2">
+<h2>Estadísticos de prueba</h2>
+<p>Cada prueba tiene un estadístico</p>
+<p><span class="math display">\[ T(X) \]</span></p>
+</section><section id="estadísticos-de-prueba-2" class="slide level2">
+<h2>Estadísticos de prueba</h2>
+<p>Este estadístico es una variable aleatoria tiene una distribución</p>
+<p><span class="math display">\[ T(X) \sim D(\theta) \]</span></p>
+</section><section id="estadísticos-de-prueba-3" class="slide level2">
+<h2>Estadísticos de prueba</h2>
+<p>Esta distribución es <strong>conocida</strong> bajo <span class="math inline">\(H_0\)</span></p>
+<p><span class="math display">\[ F_T(t) = F_0(t) \]</span></p>
+</section><section id="estadísticos-de-prueba-4" class="slide level2">
+<h2>Estadísticos de prueba</h2>
+<p>Esta distribución es <strong>desconocida</strong> bajo <span class="math inline">\(H_a\)</span></p>
+<p><span class="math display">\[ F_T(t) \neq F_0(t) \]</span></p>
+</section></section>
+<section><section id="valor-p" class="title-slide slide level1" data-background="http://www.cruzjulian.com/backgrounds/005.jpg"><h1>Valor p</h1></section><section id="qué-es" class="slide level2">
+<h2>¿Qué es?</h2>
+<p>Un p-valor se puede calcular de tres maneras:</p>
+<ul>
+<li>Cola izquierda: <span class="math inline">\(P = F_0(T)\)</span></li>
+<li>Cola derecha: <span class="math inline">\(P = 1 - F_0(T)\)</span></li>
+<li>Dos colas: <span class="math inline">\(P = 2min(F_0(T), 1 - F_0(T))\)</span></li>
+</ul>
+</section><section id="cómo-funciona" class="slide level2">
+<h2>¿Cómo funciona?</h2>
+<p>Esta definición garantiza que:</p>
+<ul>
+<li>P Es una variable aleatoria.</li>
+<li>P Se distribuye uniforme si <span class="math inline">\(H_0\)</span> es cierta.</li>
+<li>Cuando <span class="math inline">\(H_0\)</span> no es cierta P se acerca a cero.</li>
+</ul>
+</section><section id="características-de-p" class="slide level2">
+<h2>Características de P</h2>
+<p>Los p-valores son variables aleatorias de distribución uniforme bajo <span class="math inline">\(H_0\)</span>. Generalmente bajo <span class="math inline">\(H_A\)</span> el <span class="math inline">\(p\)</span>-valor es cercano a cero.</p>
+<p>Por esto es posible suponer que si <span class="math inline">\(p &lt; \alpha\)</span> la hipótesis nula no es cierta. Esta suposición tiene una probabilidad <span class="math inline">\(\alpha\)</span> de estar errada.</p>
+</section></section>
+<section><section id="la-lógica" class="title-slide slide level1" data-background="http://www.cruzjulian.com/backgrounds/007.jpg"><h1>La lógica</h1></section><section id="lógica" class="slide level2">
+<h2>Lógica</h2>
+<p>Uno de los pasos más complicados en torno a las pruebas de hipótesis es entender la lógica de como funcionan.</p>
+</section><section id="lógica-1" class="slide level2">
+<h2>Lógica</h2>
+<p>No es inusual leer en artículos publicados que se <em>acepta la hipótesis nula</em> o que se <em>rechaza la hipótesis alterna</em>.</p>
+</section><section id="lógica-2" class="slide level2">
+<h2>Lógica</h2>
+<p>El uso correcto de pruebas de hipótesis depende por completo de la comprensión de la lógica subyacente.</p>
+</section><section id="lógica-3" class="slide level2">
+<h2>Lógica</h2>
+<p>Entonces: ¿Cómo se elige la hipótesis nula?</p>
+</section><section id="cómo-juzgar-una-hipótesis" class="slide level2 diferente" data-background="https://media.giphy.com/media/BHv2DEk0iDiKhOJOUL/giphy.gif">
+<h2>¿Cómo juzgar una hipótesis?</h2>
+<h3 id="iniciemos-con-un-ejemplo">INICIEMOS CON UN EJEMPLO</h3>
+</section><section id="cómo-juzgar-una-hipótesis-1" class="slide level2">
+<h2>¿Cómo juzgar una hipótesis?</h2>
+<p>Es exactamente igual que en un juicio.</p>
+</section><section id="cómo-juzgar-una-hipótesis-2" class="slide level2">
+<h2>¿Cómo juzgar una hipótesis?</h2>
+<p>El presupuesto ha desaparecido y están juzgando al tesorero.</p>
+<p>El tesorero es inocente hasta que se demuestre lo contrario.</p>
+</section><section id="cómo-juzgar-una-hipótesis-3" class="slide level2">
+<h2>¿Cómo juzgar una hipótesis?</h2>
+<p>El tesorero no está implicado en el robo del presupuesto</p>
+<ul>
+<li>entonces él no tiene conocimiento de dónde está el dinero.</li>
+<li>entonces el dinero no se encuentra en sus cuentas bancarias.</li>
+</ul>
+<p>Evidencia:</p>
+<ul>
+<li><p><strong>A:</strong> El dinero y su transacción correspondiente aparecen en las cuentas del tesorero.</p></li>
+<li><p><strong>B:</strong> El dinero y su transacción correspondiente no aparecen en las cuentas del tesorero.</p></li>
+</ul>
+</section><section id="cómo-juzgar-una-hipótesis-4" class="slide level2">
+<h2>¿Cómo juzgar una hipótesis?</h2>
+<p><span class="math inline">\(H_0:\)</span> El tesorero es inocente. <span class="math inline">\(H_a:\)</span> El tesorero es culpable.</p>
+<p><span class="math inline">\(p &lt; \alpha\)</span> el dinero está en la cuenta del tesorero.</p>
+<p><span class="math inline">\(p &gt; \alpha\)</span> el dinero no está en la cuenta del tesorero.</p>
+</section><section id="cómo-juzgar-una-hipótesis-5" class="slide level2">
+<h2>¿Cómo juzgar una hipótesis?</h2>
+<p>Si <span class="math inline">\(p &lt; \alpha\)</span> se rechaza <span class="math inline">\(H_0\)</span></p>
+<p>Si <span class="math inline">\(p &gt; \alpha\)</span> <strong>no</strong> se rechaza <span class="math inline">\(H_0\)</span>, pero tampoco se <em>acepta</em>.</p>
+</section><section id="ahora-en-términos-prácticos" class="slide level2 diferente" data-background="https://media.giphy.com/media/TvkW5klofkBsk/giphy.gif">
+<h2>Ahora en términos prácticos</h2>
+<h3 id="lógica-de-una-prueba-de-hipótesis">LÓGICA DE UNA PRUEBA DE HIPÓTESIS</h3>
+</section><section id="lógica-de-una-prueba-de-hipótesis-1" class="slide level2">
+<h2>Lógica de una prueba de hipótesis</h2>
+<p>Si <span class="math inline">\(p &lt; \alpha\)</span> se rechaza <span class="math inline">\(H_0\)</span></p>
+<p>Si <span class="math inline">\(p &gt; \alpha\)</span> <strong>no</strong> se rechaza <span class="math inline">\(H_0\)</span>, pero tampoco se <em>acepta</em>.</p>
+</section><section id="lógica-de-una-prueba-de-hipótesis-2" class="slide level2">
+<h2>Lógica de una prueba de hipótesis</h2>
+<p>Si se cumple <span class="math inline">\(H_0\)</span></p>
+<ul>
+<li>entonces la distribución de <span class="math inline">\(T\)</span> es conocida.</li>
+<li>entonces <span class="math inline">\(F_T(t) = F_0(t)\)</span></li>
+<li>entonces <span class="math inline">\(P \sim U(0, 1)\)</span>.</li>
+<li>entonces <span class="math inline">\(Pr(P&lt; \alpha) = \alpha\)</span></li>
+</ul>
+<p>Evidencia</p>
+<ul>
+<li><p><span class="math inline">\(p &lt; \alpha\)</span> se rechaza <span class="math inline">\(H_0\)</span> corriendo un riesgo de falso positivo (<span class="math inline">\(\alpha\)</span>).</p></li>
+<li><p><span class="math inline">\(p &gt; \alpha\)</span> <strong>no</strong> se rechaza <span class="math inline">\(H_0\)</span>, pero tampoco se <em>acepta</em>.</p></li>
+</ul>
+</section><section id="lógica-de-una-prueba-de-hipótesis-3" class="slide level2 solo_texto">
+<h2>Lógica de una prueba de hipótesis</h2>
+<p>Esto significa que</p>
+<ul>
+<li><p>si <span class="math inline">\(p &lt; \alpha\)</span> se rechaza <span class="math inline">\(H_0\)</span> corriendo un riesgo de falso positivo (<span class="math inline">\(\alpha\)</span>). Al rechazar <span class="math inline">\(H_0\)</span> se afirma <span class="math inline">\(H_a\)</span>. Es decir se está realizando una afirmación sobre la población, pues las hipótesis son acerca de los parámetros.</p></li>
+<li><p><span class="math inline">\(p &gt; \alpha\)</span> <strong>no</strong> se rechaza <span class="math inline">\(H_0\)</span>, pero tampoco se <em>acepta</em>. De manera que no se realizan afirmaciones sobre la población y el alcance del estudio es muestral.</p></li>
+</ul>
+</section></section>
+<section><section id="tipos-de-error" class="title-slide slide level1" data-background="http://www.cruzjulian.com/backgrounds/031.jpg"><h1>Tipos de error</h1></section><section id="error-tipo-1" class="slide level2">
+<h2>Error tipo 1</h2>
+<p>Falsos positivos: <strong>rechazar</strong> la hipótesis nula cuando ésta es cierta.</p>
+<p>La probabilidad de que suceda es <span class="math inline">\(\alpha\)</span></p>
+</section><section id="error-tipo-2" class="slide level2">
+<h2>Error tipo 2</h2>
+<p>Falsos Negativos: <strong>No rechazar</strong> la hipótesis nula cuando ésta es falsa.</p>
+<p>La probabilidad de que suceda es <span class="math inline">\(\beta\)</span>.</p>
+</section><section id="en-conclusión" class="slide level2">
+<h2>En conclusión</h2>
+<p><img data-src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuldWSenU1lKPw2F7kkKH5zraE5wHibmAdM21m88UDZDN1Jvqb" /></p>
+</section><section id="visto-de-otra-forma" class="slide level2">
+<h2>Visto de otra forma</h2>
+<p><img data-src="https://pbs.twimg.com/media/DRsq68hV4AAfRwy?format=jpg&amp;name=small" /></p>
+</section></section>
+<section><section id="significancia-y-potencia" class="title-slide slide level1" data-background="http://www.cruzjulian.com/backgrounds/029.jpg"><h1>Significancia y potencia</h1></section><section id="error-tipo-i" class="slide level2">
+<h2>Error tipo I</h2>
+<ul>
+<li>Se denomina <span class="math inline">\(\alpha\)</span> a la <strong>probabilidad</strong> de cometer el <strong>error tipo I</strong>: <span class="math display">\[\alpha = P({\text{Error tipo 1}}) = P({\text{Rechazar $H_0$}\mid H_0})\]</span></li>
+</ul>
+</section><section id="error-tipo-ii" class="slide level2">
+<h2>Error tipo II</h2>
+<ul>
+<li>Se denomina <span class="math inline">\(\beta\)</span> a la <strong>probabilidad</strong> de cometer el <strong>error tipo II</strong>: <span class="math display">\[\alpha = P({\text{Error tipo II}}) = P({\text{No rechazar $H_0$}\mid H_a})\]</span></li>
+</ul>
+</section><section id="significancia-y-potencia-1" class="slide level2">
+<h2>Significancia y potencia</h2>
+<ul>
+<li>El número <span class="math inline">\(\alpha\)</span> es denominado significancia. y se relaciona con la cantidad de pruebas de hipótesis que pueden tener falsos positivos.</li>
+<li>El número <span class="math inline">\(1 - \beta\)</span> es denominado potencia. Depende del tamaño muestral y de la prueba de hipótesis.</li>
+<li>El nivel de significancia usualmente <strong>se fija de antemano</strong> a 0.05 o 0.01.</li>
+<li>La potencia de una prueba no se puede controlar, sólo medir.</li>
+<li>La potencia de una prueba muestra qué tan sensible es cuando la hipótesis nula es falsa.</li>
+</ul>
+</section><section id="nivel-de-significancia" class="slide level2">
+<h2>Nivel de significancia</h2>
+<ul>
+<li><strong>Probabilidad</strong> de cometer el <strong>error tipo 1</strong>: <span class="math display">\[\alpha = P({\text{Error tipo 1}}) = P({\text{Rechazar $H_0$}\mid H_0})\]</span></li>
+<li>El nivel de significancia usualmente <strong>se fija de antemano</strong> a 0.05 o 0.01.</li>
+</ul>
+</section></section>
+<section><section id="pruebas-de-hipótesis-1" class="title-slide slide level1" data-background="http://www.cruzjulian.com/backgrounds/035.jpg"><h1>Pruebas de hipótesis</h1></section><section id="procedimiento-de-prueba" class="slide level2 diferente" data-background="https://media.giphy.com/media/YnlDGfCxyOIYTDp86I/giphy.gif">
+<h2>Procedimiento de prueba</h2>
+<h3 id="cuando-rechazar-h_0">¿CUANDO RECHAZAR <span class="math inline">\(H_0\)</span>?</h3>
+</section><section id="prueba" class="slide level2">
+<h2>Prueba</h2>
+<ul>
+<li>Establecer el sistema de hipótesis de interés y el nivel de significancia <span class="math inline">\(\alpha\)</span>.</li>
+<li>Calcular el estadístico de prueba.</li>
+<li>Calcular el p-valor.</li>
+<li>Si el <span class="math inline">\(p&lt;\alpha\)</span> rechazar <span class="math inline">\(H_0\)</span></li>
+<li>Interpretar los resultados!</li>
+</ul>
+</section><section id="prueba-1" class="slide level2">
+<h2>Prueba</h2>
+<p>Si el valor <span class="math inline">\(p\)</span> es menor que <span class="math inline">\(\alpha\)</span>, entonces se rechaza <span class="math inline">\(H_0\)</span>.</p>
+</section><section id="observación" class="slide level2">
+<h2>Observación</h2>
+<p>Rechazar <span class="math inline">\(H_0\)</span> siempre que <span class="math inline">\(p &lt;\alpha\)</span>.</p>
+<p>Se ha observado algo que es tan poco probable que ocurra si la hipótesis nula es cierta que hace dudar seriamente que realmente sea cierta.</p>
+</section></section>
+<section><section id="conclusiones" class="title-slide slide level1" data-background="http://www.cruzjulian.com/backgrounds/037.jpg"><h1>Conclusiones</h1></section><section id="conclusiones-1" class="slide level2">
+<h2>Conclusiones</h2>
+<ul>
+<li>No se acepta la hipótesis nula</li>
+<li>¿Qué significa que algo sea estadísticamente significativo?</li>
+<li>No probar normalidad con gráficas ni con KS. (SW, SF, Lilliefors)</li>
+</ul>
+</section><section id="conclusiones-2" class="slide level2">
+<h2>Conclusiones</h2>
+<ul>
+<li>En una regresión no probar normalidad con los residuales. ¿Existen pruebas de normalidad condicional?</li>
+<li>La significancia de los betas está asociada a normalidad.</li>
+<li>Qué sucede cuando hacemos muchas pruebas de hipótesis (Bonferroni)</li>
+<li>¿Cómo se elige la hipótesis nula?</li>
+</ul>
+</section><section id="conclusiones-3" class="slide level2">
+<h2>Conclusiones</h2>
+<ul>
+<li>Treinta en adelante es una muestra representativa: NO! (Para qué tamaño y diseño muestral?)</li>
+<li>No paramétrico no significa mediana.</li>
+<li>Qué sentido tiene hacer una prueba de hipótesis cuando tienes toda la población? Pruebas de hipótesis en escenarios BigData.</li>
+</ul>
+</section><section id="buenas-prácticas" class="slide level2">
+<h2>Buenas prácticas</h2>
+<ul>
+<li>Definir la significancia en 0.05 cuando son pocas pruebas de hipótesis.</li>
+<li>Definir la significancia en 0.01 cuando son muchas pruebas de hipótesis.</li>
+<li>Usar pruebas de hipótesis no paramétricas siempre (funcionan con variables ordinales).</li>
+<li>Los resultados <strong>significativos</strong> no son <em>importantes</em> sino <strong>generalizables</strong>.</li>
+</ul>
+</section></section>
+
+    </div>
+  </div>
+
+  <script src="default_presentation_files/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="default_presentation_files/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: false,
+        // Display the page number of the current slide
+        slideNumber: true,
+        // Push each slide change to the browser history
+        history: false,
+        // Vertical centering of slides
+        center: true,
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+        // Transition style
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+        menu: {
+          numbers: true,
+          custom: false,
+          themes: false,
+          transitions: false
+        },
+
+
+
+        chalkboard: {
+          toggleNotesButton: true,
+          theme: 'chalkboard',
+        },
+
+        keyboard: {
+          67: function() { RevealChalkboard.toggleNotesCanvas() },    // toggle notes canvas when 'c' is pressed
+          66: function() { RevealChalkboard.toggleChalkboard() }, // toggle chalkboard when 'b' is pressed
+          46: function() { RevealChalkboard.clear() },    // clear chalkboard when 'DEL' is pressed
+           8: function() { RevealChalkboard.reset() },    // reset chalkboard data on current slide when 'BACKSPACE' is pressed
+          68: function() { RevealChalkboard.download() }, // downlad recorded chalkboard drawing when 'd' is pressed
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'default_presentation_files/reveal.js-3.3.0.1/plugin/notes/notes.js', async: true },
+          { src: 'default_presentation_files/reveal.js-3.3.0.1/plugin/chalkboard/chalkboard.js', async: true },
+          { src: 'default_presentation_files/reveal.js-3.3.0.1/plugin/menu/menu.js', async: true },
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>

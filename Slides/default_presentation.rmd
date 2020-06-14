@@ -1,0 +1,813 @@
+---
+title: "TÍTULO"
+subtitle: "Un curso"
+author: "CruzJulián"
+output: 
+  revealjs::revealjs_presentation:
+    self_contained: false
+    reveal_plugins: ["notes", "chalkboard", "menu"]
+    highlight: tango
+    reveal_options:
+      history: false
+      slideNumber: true
+      previewLinks: false
+      controls: false
+      center: true
+      chalkboard: 
+        theme: chalkboard
+        toggleNotesButton: true
+      menu:
+        numbers: true
+---
+
+# Introducción{data-background="http://www.cruzjulian.com/backgrounds/003.jpg"}
+
+## Pruebas de hipótesis
+
+ - Población-muestra
+ - Parámetros y estimadores
+ - Historia
+ - Hipótesis
+ - Estadísticos de prueba
+ - Valor p
+ - Lógica
+ - Tipos de error
+ - Significancia y potencia
+ - Pruebas de hipótesis
+ - Conclusiones
+
+
+
+
+## Objetivo
+
+Establecer si existe **suficiente evidencia** en la realización de una muestra aleatoria para **rechazar** o **no rechazar** la **hipótesis nula**. ¿Cuál hipótesis explica mejor los datos?
+
+## Vancouver{class="solo_texto"}
+
+Describir los métodos estadísticos con suficiente detalle, para permitir a un lector conocedor, con acceso a los datos originales, la verificación de los resultados que se presentan. Cuando sea posible, se deben cuantificar los hallazgos y pre- sentarlos con los correspondientes indicadores de los errores de medición e incertidumbre (tales como intervalos de confianza). Evite depender exclusivamente de las pruebas de hipótesis estadísticas, y del uso de valores de P, los que fallan cuando se pretende transmitir información importante acerca de la medida de un efecto.
+
+## Bibliografía
+
+[A farewell to p-values](https://www.researchgate.net/publication/7211964_A_farewell_to_P-values)
+
+# Población muestra{data-background="http://www.cruzjulian.com/backgrounds/019.jpg"}
+
+## Paradigma clásico
+
+ - Conjuntos pequeños de datos. Datos caros. Eficiencia = uso de menos datos.
+ - Problema población - muestra. Inferencia estadística. Supuestos distribucionales.
+ - Relaciones lineales.
+ - Explicación = Predicción. Hipótesis y pronóstico.
+
+## Paradigma emergente
+
+ - Conjuntos grandes de datos. Datos baratos. Eficiencia = Eficiencia computacional.
+ - Problema sesgo - varianza. Sobreajuste. Validación cruzada.
+ - Relaciones no lineales.
+ - Explicar o predecir.
+ - Explicaciones complejas.
+ - Pronósticos precisos. Inteligencia artificial.
+
+## Muestreo{class="diferente" data-background="https://media.giphy.com/media/42IEOtbaHuMmIXgAzS/giphy.gif"}
+
+### LA VALIDEZ DE UN ESTUDIO
+
+## Tipos de muestreo
+
+ - No probabilístico
+ - Probabilístico
+
+## Muestreo no probabilístico
+
+ - No todos los elementos tienen probabilidad de ser seleccionados
+ - La muestra no es representativa (rigurosamente)
+ - No es posible calcular el error muestral
+ - Requiere menos recursos
+
+## Muestreo no probabilístico
+
+ - Por cuotas
+ - Bola de nieve
+ - Discrecional
+ - Conveniencia
+ - Accidental
+ 
+## Muestreo probabilístico
+
+Todos los individuos en la población tienen una probabilidad específica de ser seleccionados para la muestra.
+
+
+## Muestreo probabilístico
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/gyGQ_qieVKM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+## Muestreo probabilístico
+
+ - Muestreo Aleatorio Simple
+ - Polietápico
+ - Estratos
+ - Conglomerados
+
+
+## Representatividad
+
+Una muestra es **representativa** únicamente cuando es obtenida mediante un muestreo probabilístico.
+
+## Tamaño muestral
+
+Corresponde a la mínima cantidad de encuestas que permiten obtener resultados relevantes (generalizables).
+
+## Factores de expansión
+
+Cuando tenemos un diseño muestral, es posible saber cuántos individuos de la población son representados por un individuo de la muestra. Esta cantidad se denomina _Factores de expansión_.
+
+Los factores de expansión son particularmente útiles para calcular totales. 
+
+# Parámetros y estimadores{data-background="http://www.cruzjulian.com/backgrounds/013.jpeg"}
+
+## Parámetro
+
+De manera intuitiva, un parámetro es una medida que resume la información de una población.
+
+## Estimador
+
+De manera intuitiva un estimador es una medida que resume la información de una muestra.
+
+## Ejemplos de estimadores
+
+ - Media, mediana, proporción (muestrales). 
+ - Varianza, rango intercuartílico, desviación estándar, rango (muestrales).
+ - Histograma.
+
+## Consistencia
+
+Bajo ciertas circunstancias, cuando el tamaño muestral crece, el estimador _converge_ al parámetro.
+
+ - Debe haber una muestra representativa.
+ - Elegir el estimador correcto para el parámetro correcto.
+ 
+## Modelo estadístico
+
+Un modelo estadístico es un conjunto de supuestos matemáticos que se realizan sobre la distribución asociada a un conjunto de datos.
+
+
+## Pongámonos formales{data-background="https://media.giphy.com/media/3oEjI9wxVUUwxTYpBS/giphy.gif" class="diferente"}
+
+### COMPRENDER A FONDO LA TEORÍA PARA LLEVARLA A LA PRÁCTICA
+
+## Familias paramétricas
+
+Un conjunto de medidas de probabilidad $\{P\}_\theta$ indexado por un _parámetro_ $\theta \in \Theta$ es una _familia paramétrica_ sí y sólo sí $\Theta \subseteq \mathbb{R}^d$ para algún entero positivo $d$, de manera que $P_\theta$ es conocido cuando $\theta$ es conocido.
+
+(Shao, 2003, definición 2.1)
+
+## Distribución Normal
+
+La distribución normal es una familia paramétrica.
+
+$$ \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{(x - \mu)^2}{2\sigma^2}} $$
+
+puesto que se define completamente con dos parámetros $\mu$ y $\sigma$ como podemos ver [aquí](https://www.desmos.com/calculator/2zjv3c3qjn).
+
+## Familia no paramétrica
+
+Una familia de medidas de probabilidad se dice _no paramétrica_ cuando no es paramétrica de acuerdo a la definición de [Familias paramétricas]
+
+## Modelo paramétrico y no paramétrico
+
+Un modelo estadístico es paramétrico cuando se asume que la distribución de los datos pertenece a una familia paramétrica. En el caso contrario, se trata de un modelo no paramétrico.
+
+## Modelos paramétricos
+
+Al tener un modelo paramétrico, $P_\theta$ el problema se reduce a encontrar el parámetro que permita un mejor ajuste a los datos. Esto se puede realizar mediante distintas técnicas.
+
+
+ - Método de los momentos
+ - Máxima verosimilitud
+ - Estimación bayesiana
+
+
+## Modelos no paramétricos
+
+Los modelos no paramétricos realizan sus estimaciones de manera general, sobre el comportamiento de los datos, sin el uso de familias paramétricas. Sin embargo un modelo es un conjunto de supuestos. Algunos supuestos de los modelos no paramétricos son:
+
+ - Los datos corresponden a variables de tipo numérico continuo.
+ - Los datos se sitúan en un espacio métrico.
+ - La densidad de los datos es derivable.
+
+## Pruebas paramétricas y no paramétricas
+
+Las pruebas paramétricas funcionan en familias paramétricas.
+
+
+
+# Historia{data-background="http://www.cruzjulian.com/backgrounds/023.jpg"}
+
+## Carl Pearson
+
+Propuesta por Carl Pearson [la prueba $\chi^2$](http://www.economics.soton.ac.uk/staff/aldrich/1900.pdf) consiste en el cálculo de un estadístico como indicador de dependencia entre variables categóricas.
+
+También demuestra que este criterio sigue una distribución $\chi^2$, dando así un criterio de comparabilidad. También un valor **P**, con fórmula propia.
+
+## Ronald Fischer
+
+ - Hipótesis nula.
+ - Concepto de significancia.
+ - Región crítica. (obsoleta)
+ 
+ 
+## Jerzy Neyman y Egon Pearson
+
+ - Hipótesis nula vs hipótesis alterna.
+ - Error tipo I
+ - Error tipo II
+ - Significancia: $\alpha$.
+ - Potencia: $1-\beta$.
+ - Pruebas uniformemente más potentes.
+ - Teorema de Neyman Pearson.
+ 
+
+# Hipótesis{data-background="http://www.cruzjulian.com/backgrounds/025.jpg"}
+
+## Hipótesis estadística
+
+**Afirmación**  acerca de uno o más **parámetros**.
+
+ - Hipótesis **simple**: $H:\mu = \mu_0$.
+ - Hipótesis **compuesta**: $H:\mu \geq \mu_0$, $H:\mu \leq \mu_0$, $H:\mu > \mu_0$, $H:\mu < \mu_0$, $H:\mu \neq \mu_0$.
+ - $\mu_0$ se denomina **valor hipotético**.
+
+## A priori
+
+Una hipótesis estadística debe ser establecida antes del análisis de los datos.
+
+ - $H: \mu = \overline{x}$
+ - $H: X \sim N(\overline{x}, s^2)$
+
+## Sistema de hipótesis
+
+**Arreglo de dos hipótesis** denominadas **hipótesis nula** e **hipótesis alternativa**.
+
+ - $H_0:\mu \leq \mu_0$ frente a $H_1:\mu > \mu_0$.
+ - $H_0:\mu \geq \mu_0$ frente a $H_1:\mu < \mu_0$.
+ - $H_0:\mu = \mu_0$ frente a $H_1:\mu \neq \mu_0$.
+
+## Dos colas
+
+$H_0:\mu = \mu_0$ frente a $H_1:\mu \neq \mu_0$.
+
+## Cola izquierda
+
+$H_0:\mu = \mu_0$ frente a $H_1:\mu < \mu_0$.
+
+## Cola derecha
+
+$H_0:\mu = \mu_0$ frente a $H_1:\mu > \mu_0$.
+
+
+# Estadísticos de prueba{data-background="http://www.cruzjulian.com/backgrounds/039.jpg"}
+
+## Estadísticos de prueba
+
+Cada prueba tiene un estadístico
+
+$$ T(X) $$
+
+## Estadísticos de prueba
+
+Este estadístico es una variable aleatoria tiene una distribución
+
+$$ T(X) \sim D(\theta) $$
+
+## Estadísticos de prueba
+
+Esta distribución es **conocida** bajo $H_0$
+
+$$ F_T(t) = F_0(t) $$
+
+## Estadísticos de prueba
+
+Esta distribución es **desconocida** bajo $H_a$
+
+$$ F_T(t) \neq F_0(t) $$
+
+
+
+# Valor p{data-background="http://www.cruzjulian.com/backgrounds/005.jpg"}
+
+## ¿Qué es?
+
+Un p-valor se puede calcular de tres maneras:
+
+ - Cola izquierda: $P = F_0(T)$
+ - Cola derecha: $P = 1 - F_0(T)$
+ - Dos colas: $P = 2min(F_0(T), 1 - F_0(T))$
+
+
+## ¿Cómo funciona?
+
+Esta definición garantiza que:
+
+ - P Es una variable aleatoria.
+ - P Se distribuye uniforme si $H_0$ es cierta.
+ - Cuando $H_0$ no es cierta P se acerca a cero. 
+
+
+## Características de P
+
+Los p-valores son variables aleatorias de distribución uniforme bajo $H_0$. Generalmente bajo $H_A$ el $p$-valor es cercano a cero.
+
+Por esto es posible suponer que si $p < \alpha$ la hipótesis nula no es cierta. Esta suposición tiene una probabilidad $\alpha$ de estar errada.
+
+# La lógica{data-background="http://www.cruzjulian.com/backgrounds/007.jpg"}
+
+
+## Lógica
+
+
+Uno de los pasos más complicados en torno a las pruebas de hipótesis es entender la lógica de como funcionan.
+
+## Lógica
+
+No es inusual leer en artículos publicados que se _acepta la hipótesis nula_ o que se _rechaza la hipótesis alterna_.
+
+## Lógica
+
+El uso correcto de pruebas de hipótesis depende por completo de la comprensión de la lógica subyacente.
+
+
+## Lógica
+
+Entonces: ¿Cómo se elige la hipótesis nula?
+
+## ¿Cómo juzgar una hipótesis?{data-background="https://media.giphy.com/media/BHv2DEk0iDiKhOJOUL/giphy.gif" class="diferente"}
+
+### INICIEMOS CON UN EJEMPLO
+
+
+## ¿Cómo juzgar una hipótesis?
+
+Es exactamente igual que en un juicio.
+
+## ¿Cómo juzgar una hipótesis?
+
+El presupuesto ha desaparecido y están juzgando al tesorero.
+
+El tesorero es inocente hasta que se demuestre lo contrario.
+
+## ¿Cómo juzgar una hipótesis?
+
+El tesorero no está implicado en el robo del presupuesto
+
+ - entonces él no tiene conocimiento de dónde está el dinero.
+ - entonces el dinero no se encuentra en sus cuentas bancarias.
+
+Evidencia:
+
+ - **A:** El dinero y su transacción correspondiente aparecen en las cuentas del tesorero.
+ 
+ - **B:** El dinero y su transacción correspondiente no aparecen en las cuentas del tesorero.
+ 
+## ¿Cómo juzgar una hipótesis?
+
+$H_0:$ El tesorero es inocente.
+$H_a:$ El tesorero es culpable.
+
+$p < \alpha$ el dinero está en la cuenta del tesorero.
+
+$p > \alpha$ el dinero no está en la cuenta del tesorero.
+
+
+
+## ¿Cómo juzgar una hipótesis?
+
+Si $p < \alpha$ se rechaza $H_0$
+
+Si $p > \alpha$ **no** se rechaza $H_0$, pero tampoco se _acepta_.
+
+
+## Ahora en términos prácticos{class="diferente" data-background="https://media.giphy.com/media/TvkW5klofkBsk/giphy.gif"}
+
+### LÓGICA DE UNA PRUEBA DE HIPÓTESIS
+
+
+## Lógica de una prueba de hipótesis
+
+Si $p < \alpha$ se rechaza $H_0$
+
+Si $p > \alpha$ **no** se rechaza $H_0$, pero tampoco se _acepta_.
+
+
+## Lógica de una prueba de hipótesis
+
+Si se cumple $H_0$ 
+
+ - entonces la distribución de $T$ es conocida.
+ - entonces $F_T(t) = F_0(t)$
+ - entonces $P \sim U(0, 1)$.
+ - entonces $Pr(P< \alpha) = \alpha$
+
+Evidencia
+
+ - $p < \alpha$ se rechaza $H_0$ corriendo un riesgo de falso positivo ($\alpha$).
+ 
+ - $p > \alpha$ **no** se rechaza $H_0$, pero tampoco se _acepta_.
+
+
+## Lógica de una prueba de hipótesis{class="solo_texto"}
+
+Esto significa que
+
+ - si $p < \alpha$ se rechaza $H_0$ corriendo un riesgo de falso positivo ($\alpha$). Al rechazar $H_0$ se afirma $H_a$. Es decir se está realizando una afirmación sobre la población, pues las hipótesis son acerca de los parámetros.
+
+ - $p > \alpha$ **no** se rechaza $H_0$, pero tampoco se _acepta_. De manera que no se realizan afirmaciones sobre la población y el alcance del estudio es muestral.
+
+
+# Tipos de error{data-background="http://www.cruzjulian.com/backgrounds/031.jpg"}
+
+
+## Error tipo 1 
+
+Falsos positivos: **rechazar** la hipótesis nula cuando ésta es cierta.
+
+La probabilidad de que suceda es $\alpha$
+
+## Error tipo 2 
+
+
+Falsos Negativos: **No rechazar** la hipótesis nula cuando ésta es falsa.
+
+La probabilidad de que suceda es $\beta$.
+
+## En conclusión
+
+![](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuldWSenU1lKPw2F7kkKH5zraE5wHibmAdM21m88UDZDN1Jvqb)
+
+## Visto de otra forma
+
+![](https://pbs.twimg.com/media/DRsq68hV4AAfRwy?format=jpg&name=small)
+
+# Significancia y potencia{data-background="http://www.cruzjulian.com/backgrounds/029.jpg"}
+
+## Error tipo I
+
+ - Se denomina $\alpha$ a la **probabilidad** de cometer el **error tipo I**: $$\alpha = P({\text{Error tipo 1}}) = P({\text{Rechazar $H_0$}\mid H_0})$$
+
+## Error tipo II
+
+ - Se denomina $\beta$ a la **probabilidad** de cometer el **error tipo II**: $$\alpha = P({\text{Error tipo II}}) = P({\text{No rechazar $H_0$}\mid H_a})$$
+
+## Significancia y potencia
+
+ - El número $\alpha$ es denominado significancia. y se relaciona con la cantidad de pruebas de hipótesis que pueden tener falsos positivos.
+ - El número $1 - \beta$ es denominado potencia. Depende del tamaño muestral y de la prueba de hipótesis.
+ - El nivel de significancia usualmente **se fija de antemano** a 0.05 o 0.01.
+ - La potencia de una prueba no se puede controlar, sólo medir.
+ - La potencia de una prueba muestra qué tan sensible es cuando la hipótesis nula es falsa.
+
+
+## Nivel de significancia
+
+
+ - **Probabilidad** de cometer el **error tipo 1**: $$\alpha = P({\text{Error tipo 1}}) = P({\text{Rechazar $H_0$}\mid H_0})$$
+ - El nivel de significancia usualmente **se fija de antemano** a 0.05 o 0.01.
+
+
+# Pruebas de hipótesis{data-background="http://www.cruzjulian.com/backgrounds/035.jpg"}
+
+## Procedimiento de prueba{class="diferente" data-background="https://media.giphy.com/media/YnlDGfCxyOIYTDp86I/giphy.gif"}
+
+### ¿CUANDO RECHAZAR $H_0$?
+
+## Prueba
+
+ - Establecer el sistema de hipótesis de interés y el nivel de significancia $\alpha$.
+ - Calcular el estadístico de prueba.
+ - Calcular el p-valor.
+ - Si el $p<\alpha$ rechazar $H_0$
+ - Interpretar los resultados!
+
+## Prueba
+
+Si el valor $p$ es menor que $\alpha$, entonces se rechaza $H_0$.
+
+## Observación
+
+Rechazar $H_0$ siempre que $p <\alpha$.
+
+Se ha observado algo que es tan poco probable que ocurra si la hipótesis nula es cierta que hace dudar seriamente que realmente sea cierta.
+
+# Conclusiones{data-background="http://www.cruzjulian.com/backgrounds/037.jpg"}
+
+## Conclusiones
+
+ - No se acepta la hipótesis nula
+ - ¿Qué significa que algo sea estadísticamente significativo?
+ - No probar normalidad con gráficas ni con KS. (SW, SF, Lilliefors)
+
+## Conclusiones
+
+ - En una regresión no probar normalidad con los residuales. ¿Existen pruebas de normalidad condicional?
+ - La significancia de los betas está asociada a normalidad. 
+ - Qué sucede cuando hacemos muchas pruebas de hipótesis (Bonferroni)
+ - ¿Cómo se elige la hipótesis nula?
+
+
+
+## Conclusiones
+
+ - Treinta en adelante es una muestra representativa: NO! (Para qué tamaño y diseño muestral?)
+ - No paramétrico no significa mediana.
+ - Qué sentido tiene hacer una prueba de hipótesis cuando tienes toda la población? Pruebas de hipótesis en escenarios BigData.
+
+
+## Buenas prácticas
+
+ - Definir la significancia en 0.05 cuando son pocas pruebas de hipótesis.
+ - Definir la significancia en 0.01 cuando son muchas pruebas de hipótesis.
+ - Usar pruebas de hipótesis no paramétricas siempre (funcionan con variables ordinales).
+ - Los resultados **significativos** no son _importantes_ sino **generalizables**.
+
+
+
+
+# Textos{data-background="backgrounds/19.jpg"}
+
+## Diapositiva de texto (1){class="solo_texto"}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+
+
+## Diapositiva de bullets (1)
+
+ - Primer bullet
+ - Segundo bullet
+ - Tercero...
+ - Y así sigue
+
+## Diapositiva de bullets (2)
+
+ - Primer bullet
+ 
+ - Segundo bullet
+
+ - Tercero...
+
+ - Y así sigue
+
+## Diapositiva de texto y bullets{class="solo_texto"}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
+
+ - Primer bullet
+ - Segundo bullet
+ - Tercero...
+ - Y así sigue
+ 
+## Diapositiva con un título muy largo que no se comprende{class="titulo_largo"}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
+
+
+## Diapositiva diferente{class="diferente" data-background="backgrounds/15.jpg"}
+
+### Con subtítulo
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
+
+
+## Links
+
+[To Explain or To Predict](https://www.stat.berkeley.edu/~aldous/157/Papers/shmueli.pdf)
+
+
+# Ecuaciones{data-background="backgrounds/20.jpg"}
+
+
+## Definición de una distancia
+
+En un espacio métrico una distancia es una función real $d$ que, para cualquier par de puntos $x$ y $y$ cumple:
+
+ - No negatividad: $d(x, y) \geq 0$ y $d(x, y) = 0$ sí y sólo sí $x = y$.
+ - Simetría: $d(x, y) = d(y, x)$.
+ - Desigualdad triangular: $d(x, z) \leq d(x, y) + d(y, z)$.
+
+## ACP (2)
+
+Dado un conjunto de variables $X$ el procedimiento encuentra coeficientes $\alpha$ que maximizan la información explicada en su combinación lineal $Z$, así:
+
+$$ Z = X\alpha = \sum_\limits{i=1}^k \alpha_i X_i $$
+
+
+# Imágenes
+
+## Meme alargado
+
+![meme alargado](https://cdn-images-1.medium.com/max/1600/1*eLjON45R_kHIfg_IgL8FIg.jpeg)
+
+## Meme cuadrado
+
+![meme cuadrado](https://pics.me.me/matlab-the-language-of-technical-computing-o-tm-r-studio-32056306.png)
+
+## Meme estirado
+![meme estirado](https://i.redd.it/foexw0ch0kv01.jpg)
+
+# Código
+
+## Matriz de distancias ejemplo (1)
+
+```{r exampol_plot, echo = TRUE, results= "hide", fig.width=6.1, fig.height=5, message = FALSE}
+library("tibble")
+library("ggplot2")
+library("dplyr")
+library("knitr")
+
+tibble(
+  x_value = rnorm(5),
+  y_value = runif(5)      
+) -> exampol
+
+exampol %>% 
+  ggplot + 
+  aes(x = x_value, y = y_value) + 
+  geom_point() + theme_light() -> plot_points
+
+```
+
+
+## Matriz de distancias ejemplo (2)
+
+```{r exampol_table, echo = TRUE, results= "hide", fig.width=6.1, fig.height=5, message = FALSE}
+exampol %>% 
+  dist %>% 
+  as.matrix %>% 
+  as_tibble(rownames = "ind") -> table_points
+
+```
+
+
+## Matriz de distancias ejemplo (3)
+
+```{r echo = FALSE, include = TRUE}
+plot_points
+
+```
+
+
+## Matriz de distancias ejemplo (4)
+
+```{r echo = FALSE}
+table_points %>%  kable(digits = 2)
+
+```
+
+# Tablas
+
+## Tabla normal
+
+
+```{r echo = FALSE}
+table_points %>%  kable(digits = 2)
+
+```
+
+## Tabla a mano
+
+|ind |    1|    2|    3|    4|    5|
+|:---|----:|----:|----:|----:|----:|
+|1   | 0.00| 1.12| 1.36| 0.42| 1.93|
+|2   | 1.12| 0.00| 2.24| 1.23| 2.86|
+|3   | 1.36| 2.24| 0.00| 1.03| 0.62|
+|4   | 0.42| 1.23| 1.03| 0.00| 1.64|
+|5   | 1.93| 2.86| 0.62| 1.64| 0.00|
+
+
+# Bullets
+
+## Bullets juntas
+
+ - Primero tesorero
+ - Segundo rey del mundo
+ - Tercero tesorero
+ - Cuarto lagarto
+
+
+## Bullets separadas
+
+ - Primero tesorero
+
+ - Segundo rey del mundo
+
+ - Tercero tesorero
+
+ - Cuarto lagarto
+
+
+## Bullets anidadas
+
+
+ - Primero tesorero
+    - Quinto piojinto
+ - Segundo rey del mundo
+    - Sexto deshonesto
+ - Tercero tesorero
+    - Repleto de cáscaras
+ - Cuarto lagarto
+
+
+
+
+# Marcos
+
+## Interpretación
+
+<blockquote class="twitter-tweet" data-lang="es"><p lang="es" dir="ltr">Si lo que vas a decir es &quot;La varianza de una variable se interpreta como la variabilidad de la variable.&quot; mejor no digas nada.</p>&mdash; Cruz Julián (@Cruz_Julian_) <a href="https://twitter.com/Cruz_Julian_/status/1134525970130620416?ref_src=twsrc%5Etfw">31 de mayo de 2019</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+## $k$-means (convergencia)
+
+<iframe width="600" height="315" src="https://www.youtube.com/embed/5I3Ei69I40s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## $k$-means (problemas)
+
+
+<iframe width="600" height="315" src="https://www.youtube.com/embed/BVFG7fd1H30" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+
+
+# portadas
+
+
+## Instrumentos{class="diferente" data-background="https://media.giphy.com/media/3oEjI9wxVUUwxTYpBS/giphy.gif"}
+
+### usado
+
+
+
+
+## Constructos{class="diferente" data-background="https://media.giphy.com/media/BHv2DEk0iDiKhOJOUL/giphy.gif"}
+
+### USADO
+
+
+
+## Muestreo{class="diferente" data-background="https://media.giphy.com/media/42IEOtbaHuMmIXgAzS/giphy.gif"}
+
+### Por usar
+
+
+
+
+## Inferencia{class="diferente" data-background="https://media.giphy.com/media/l3q2GAzzq7RCf5H6o/giphy.gif"}
+
+### Por usar
+
+
+## Procedimiento de prueba{class="diferente" data-background="https://media.giphy.com/media/YnlDGfCxyOIYTDp86I/giphy.gif"}
+
+### Por usar
+
+## Contextualización{class="diferente" data-background="https://media.giphy.com/media/3osxYrhcl17YmhQzu0/giphy.gif"}
+
+### Por usar
+
+
+
+
+
+## Modelos de medición{class="diferente" data-background="https://media.giphy.com/media/XI7zkv4X89kcsmLJnV/giphy.gif"}
+
+### PARA MEDIR COSAS
+
+ 
+
+## Pronóstico{class="diferente" data-background="https://media.giphy.com/media/Upbaenz0swDXq/giphy.gif"}
+
+### CUANDO PRONOSTICAR NO ES PREDECIR
+
+
+
+
+
+## Métricas{class="diferente" data-background="https://media.giphy.com/media/3o6ZtqTq9Ae3QCNcbe/giphy.gif"}
+
+### INDICADORES EN MERCADEO
+
+
+
+## A/B testing{class="diferente" data-background="https://media.giphy.com/media/3oEjI2GUZ3RffMInja/giphy.gif"}
+
+### DISEÑANDO EXPERIMENTOS
+
+
+
+
+## Ejemplo{class="diferente" data-background="https://media.giphy.com/media/lnfzT3k8g7wpG/giphy.gif"}
+
+### POSICIONAMIENTO DE PELÍCULAS

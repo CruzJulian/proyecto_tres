@@ -1,7 +1,7 @@
 ---
 title: "TÍTULO"
 subtitle: "Un curso"
-author: "CruzJulián"
+author: "Cruz - Fonseca"
 output: 
   revealjs::revealjs_presentation:
     self_contained: false
@@ -24,18 +24,29 @@ output:
 
 ## Pruebas de hipótesis
 
- - Población-muestra
+ - Modus tollens
+ - Uniformización
+ - Paradigma población muestra
  - Parámetros y estimadores
+ - Parámetros y estimadores en R
  - Historia
- - Hipótesis
+ - Hipóesis
  - Estadísticos de prueba
+ - Estadísticos de prueba con R
+ - Significancia
  - Valor p
- - Lógica
+ - Valor p
+ - Valor p
+ - Lógica (1) (semántica?)
+ - Hipótesis
  - Tipos de error
- - Significancia y potencia
- - Pruebas de hipótesis
- - Conclusiones
-
+ - Potencia
+ - Potencia
+ - Lógica (2) (Semántica?)
+ - Pruebas de hipótesis en regresión Lineal
+ - Pruebas de permutaciones.
+ - Pruebas de hipótesis Bayesianas
+ - Anova
 
 
 
@@ -51,7 +62,155 @@ Describir los métodos estadísticos con suficiente detalle, para permitir a un 
 
 [A farewell to p-values](https://www.researchgate.net/publication/7211964_A_farewell_to_P-values)
 
-# Población muestra{data-background="http://www.cruzjulian.com/backgrounds/019.jpg"}
+
+# Antecedentes{data-background="https://media.giphy.com/media/42IEOtbaHuMmIXgAzS/giphy.gif"}
+
+## Modus Tollens{class="diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg"}
+
+### HABLEMOS DE LÓGICA
+
+## Uniformización{class="diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg"}
+
+### TEOREMAS SOBRE LA DISTRIBUCIÓN UNIFORME
+
+
+
+## Paradigma Población muestra{class="diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg"}
+
+
+### EL CENTRO DE LA ESTADÍSTICA CLÁSICA
+
+## Parámetros y estimadores{class="diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg"}
+
+
+
+### NÚMEROS QUE CONVERGEN
+
+## Parámetros y estimadores{class="diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg"}
+
+
+
+### PRÁCTICA
+
+## Historia{class="diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg"}
+
+
+
+### DE DÓNDE VIENE TODO
+
+# Fisher{data-background="https://media.giphy.com/media/42IEOtbaHuMmIXgAzS/giphy.gif"}
+
+
+
+## Hipótesis{class="diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg"}
+
+
+
+### PREGÚNTALE A LOS DATOS
+
+## Estadísticos de prueba{class="diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg"}
+
+
+### QUE DEMUESTRAN COSAS
+
+
+## Estadísticos de prueba con R{class="diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg"}
+
+
+### PRÁCTICA
+
+
+## Significancia{class="diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg"}
+
+
+### ¿QUÉ SIGNIFICA?
+
+
+## Valor p{class="diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg"}
+
+
+### EL CONCEPTO MÁS COMPLEJO
+
+
+## Valor p{class="diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg"}
+
+
+
+### SU DISTRIBUCIÓN
+
+## Valor p{class="diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg"}
+
+
+
+### PRÁCTICA
+
+## Lógica (1) (semántica?){class="diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg"}
+
+
+### ¿CÓMO FUNCIONA?
+
+# Neyman Pearson{data-background="https://media.giphy.com/media/42IEOtbaHuMmIXgAzS/giphy.gif"}
+
+## Hipótesis{class="diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg"}
+
+
+
+### UNA NUEVA FORMA
+
+## Tipos de error{class="diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg"}
+
+
+### TIPO I Y TIPO II
+
+
+## Potencia{class="diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg"}
+
+
+### LA SIGNIFICANCIA PERO AL REVÉS
+
+
+## Potencia{class="diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg"}
+
+
+### PRÁCTICA
+
+
+## Lógica (2) (Semántica?){class="diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg"}
+
+
+### ¿CÓMO FUNCIONA?
+
+# Discusión{data-background="https://media.giphy.com/media/42IEOtbaHuMmIXgAzS/giphy.gif"}
+
+
+
+## Pruebas de hipótesis en regresión Lineal{class="diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg"}
+
+
+### NADA ES LO QUE PARECE
+
+
+## Pruebas de permutaciones.{class="diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg"}
+
+
+### CON SIMULACIÓN TODO ES MÁS FÁCIL
+
+
+## Pruebas de hipótesis Bayesianas{class="diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg"}
+
+
+### SON MEJORES
+
+
+## Anova{class="diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg"}
+
+
+### ¿ES UN MODELO?
+
+
+
+
+# Diapositivas
 
 ## Paradigma clásico
 

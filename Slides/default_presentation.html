@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
-  <meta name="author" content="CruzJulián" />
+  <meta name="author" content="Cruz - Fonseca" />
   <title>TÍTULO</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -12,9 +12,9 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -24,14 +24,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -40,9 +42,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  { background-color: #f8f8f8; }
+  {  background-color: #f8f8f8; }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -518,23 +520,35 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section>
     <h1 class="title">TÍTULO</h1>
   <h1 class="subtitle">Un curso</h1>
-    <h2 class="author">CruzJulián</h2>
+    <h2 class="author">Cruz - Fonseca</h2>
 </section>
 
 <section><section id="introducción" class="title-slide slide level1" data-background="http://www.cruzjulian.com/backgrounds/003.jpg"><h1>Introducción</h1></section><section id="pruebas-de-hipótesis" class="slide level2">
 <h2>Pruebas de hipótesis</h2>
 <ul>
-<li>Población-muestra</li>
+<li>Modus tollens</li>
+<li>Uniformización</li>
+<li>Paradigma población muestra</li>
 <li>Parámetros y estimadores</li>
+<li>Parámetros y estimadores en R</li>
 <li>Historia</li>
-<li>Hipótesis</li>
+<li>Hipóesis</li>
 <li>Estadísticos de prueba</li>
+<li>Estadísticos de prueba con R</li>
+<li>Significancia</li>
 <li>Valor p</li>
-<li>Lógica</li>
+<li>Valor p</li>
+<li>Valor p</li>
+<li>Lógica (1) (semántica?)</li>
+<li>Hipótesis</li>
 <li>Tipos de error</li>
-<li>Significancia y potencia</li>
-<li>Pruebas de hipótesis</li>
-<li>Conclusiones</li>
+<li>Potencia</li>
+<li>Potencia</li>
+<li>Lógica (2) (Semántica?)</li>
+<li>Pruebas de hipótesis en regresión Lineal</li>
+<li>Pruebas de permutaciones.</li>
+<li>Pruebas de hipótesis Bayesianas</li>
+<li>Anova</li>
 </ul>
 </section><section id="objetivo" class="slide level2">
 <h2>Objetivo</h2>
@@ -546,7 +560,80 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2>Bibliografía</h2>
 <p><a href="https://www.researchgate.net/publication/7211964_A_farewell_to_P-values">A farewell to p-values</a></p>
 </section></section>
-<section><section id="población-muestra" class="title-slide slide level1" data-background="http://www.cruzjulian.com/backgrounds/019.jpg"><h1>Población muestra</h1></section><section id="paradigma-clásico" class="slide level2">
+<section><section id="antecedentes" class="title-slide slide level1" data-background="https://media.giphy.com/media/42IEOtbaHuMmIXgAzS/giphy.gif"><h1>Antecedentes</h1></section><section id="modus-tollens" class="slide level2 diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg">
+<h2>Modus Tollens</h2>
+<h3 id="hablemos-de-lógica">HABLEMOS DE LÓGICA</h3>
+</section><section id="uniformización" class="slide level2 diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg">
+<h2>Uniformización</h2>
+<h3 id="teoremas-sobre-la-distribución-uniforme">TEOREMAS SOBRE LA DISTRIBUCIÓN UNIFORME</h3>
+</section><section id="paradigma-población-muestra" class="slide level2 diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg">
+<h2>Paradigma Población muestra</h2>
+<h3 id="el-centro-de-la-estadística-clásica">EL CENTRO DE LA ESTADÍSTICA CLÁSICA</h3>
+</section><section id="parámetros-y-estimadores" class="slide level2 diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg">
+<h2>Parámetros y estimadores</h2>
+<h3 id="números-que-convergen">NÚMEROS QUE CONVERGEN</h3>
+</section><section id="parámetros-y-estimadores-1" class="slide level2 diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg">
+<h2>Parámetros y estimadores</h2>
+<h3 id="práctica">PRÁCTICA</h3>
+</section><section id="historia" class="slide level2 diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg">
+<h2>Historia</h2>
+<h3 id="de-dónde-viene-todo">DE DÓNDE VIENE TODO</h3>
+</section></section>
+<section><section id="fisher" class="title-slide slide level1" data-background="https://media.giphy.com/media/42IEOtbaHuMmIXgAzS/giphy.gif"><h1>Fisher</h1></section><section id="hipótesis" class="slide level2 diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg">
+<h2>Hipótesis</h2>
+<h3 id="pregúntale-a-los-datos">PREGÚNTALE A LOS DATOS</h3>
+</section><section id="estadísticos-de-prueba" class="slide level2 diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg">
+<h2>Estadísticos de prueba</h2>
+<h3 id="que-demuestran-cosas">QUE DEMUESTRAN COSAS</h3>
+</section><section id="estadísticos-de-prueba-con-r" class="slide level2 diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg">
+<h2>Estadísticos de prueba con R</h2>
+<h3 id="práctica-1">PRÁCTICA</h3>
+</section><section id="significancia" class="slide level2 diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg">
+<h2>Significancia</h2>
+<h3 id="qué-significa">¿QUÉ SIGNIFICA?</h3>
+</section><section id="valor-p" class="slide level2 diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg">
+<h2>Valor p</h2>
+<h3 id="el-concepto-más-complejo">EL CONCEPTO MÁS COMPLEJO</h3>
+</section><section id="valor-p-1" class="slide level2 diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg">
+<h2>Valor p</h2>
+<h3 id="su-distribución">SU DISTRIBUCIÓN</h3>
+</section><section id="valor-p-2" class="slide level2 diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg">
+<h2>Valor p</h2>
+<h3 id="práctica-2">PRÁCTICA</h3>
+</section><section id="lógica-1-semántica" class="slide level2 diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg">
+<h2>Lógica (1) (semántica?)</h2>
+<h3 id="cómo-funciona">¿CÓMO FUNCIONA?</h3>
+</section></section>
+<section><section id="neyman-pearson" class="title-slide slide level1" data-background="https://media.giphy.com/media/42IEOtbaHuMmIXgAzS/giphy.gif"><h1>Neyman Pearson</h1></section><section id="hipótesis-1" class="slide level2 diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg">
+<h2>Hipótesis</h2>
+<h3 id="una-nueva-forma">UNA NUEVA FORMA</h3>
+</section><section id="tipos-de-error" class="slide level2 diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg">
+<h2>Tipos de error</h2>
+<h3 id="tipo-i-y-tipo-ii">TIPO I Y TIPO II</h3>
+</section><section id="potencia" class="slide level2 diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg">
+<h2>Potencia</h2>
+<h3 id="la-significancia-pero-al-revés">LA SIGNIFICANCIA PERO AL REVÉS</h3>
+</section><section id="potencia-1" class="slide level2 diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg">
+<h2>Potencia</h2>
+<h3 id="práctica-3">PRÁCTICA</h3>
+</section><section id="lógica-2-semántica" class="slide level2 diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg">
+<h2>Lógica (2) (Semántica?)</h2>
+<h3 id="cómo-funciona-1">¿CÓMO FUNCIONA?</h3>
+</section></section>
+<section><section id="discusión" class="title-slide slide level1" data-background="https://media.giphy.com/media/42IEOtbaHuMmIXgAzS/giphy.gif"><h1>Discusión</h1></section><section id="pruebas-de-hipótesis-en-regresión-lineal" class="slide level2 diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg">
+<h2>Pruebas de hipótesis en regresión Lineal</h2>
+<h3 id="nada-es-lo-que-parece">NADA ES LO QUE PARECE</h3>
+</section><section id="pruebas-de-permutaciones." class="slide level2 diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg">
+<h2>Pruebas de permutaciones.</h2>
+<h3 id="con-simulación-todo-es-más-fácil">CON SIMULACIÓN TODO ES MÁS FÁCIL</h3>
+</section><section id="pruebas-de-hipótesis-bayesianas" class="slide level2 diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg">
+<h2>Pruebas de hipótesis Bayesianas</h2>
+<h3 id="son-mejores">SON MEJORES</h3>
+</section><section id="anova" class="slide level2 diferente" data-background="http://www.cruzjulian.com/backgrounds/019.jpg">
+<h2>Anova</h2>
+<h3 id="es-un-modelo">¿ES UN MODELO?</h3>
+</section></section>
+<section><section id="diapositivas" class="title-slide slide level1"><h1>Diapositivas</h1></section><section id="paradigma-clásico" class="slide level2">
 <h2>Paradigma clásico</h2>
 <ul>
 <li>Conjuntos pequeños de datos. Datos caros. Eficiencia = uso de menos datos.</li>
@@ -616,7 +703,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <p>Cuando tenemos un diseño muestral, es posible saber cuántos individuos de la población son representados por un individuo de la muestra. Esta cantidad se denomina <em>Factores de expansión</em>.</p>
 <p>Los factores de expansión son particularmente útiles para calcular totales.</p>
 </section></section>
-<section><section id="parámetros-y-estimadores" class="title-slide slide level1" data-background="http://www.cruzjulian.com/backgrounds/013.jpeg"><h1>Parámetros y estimadores</h1></section><section id="parámetro" class="slide level2">
+<section><section id="parámetros-y-estimadores-2" class="title-slide slide level1" data-background="http://www.cruzjulian.com/backgrounds/013.jpeg"><h1>Parámetros y estimadores</h1></section><section id="parámetro" class="slide level2">
 <h2>Parámetro</h2>
 <p>De manera intuitiva, un parámetro es una medida que resume la información de una población.</p>
 </section><section id="estimador" class="slide level2">
@@ -677,7 +764,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2>Pruebas paramétricas y no paramétricas</h2>
 <p>Las pruebas paramétricas funcionan en familias paramétricas.</p>
 </section></section>
-<section><section id="historia" class="title-slide slide level1" data-background="http://www.cruzjulian.com/backgrounds/023.jpg"><h1>Historia</h1></section><section id="carl-pearson" class="slide level2">
+<section><section id="historia-1" class="title-slide slide level1" data-background="http://www.cruzjulian.com/backgrounds/023.jpg"><h1>Historia</h1></section><section id="carl-pearson" class="slide level2">
 <h2>Carl Pearson</h2>
 <p>Propuesta por Carl Pearson <a href="http://www.economics.soton.ac.uk/staff/aldrich/1900.pdf">la prueba <span class="math inline">\(\chi^2\)</span></a> consiste en el cálculo de un estadístico como indicador de dependencia entre variables categóricas.</p>
 <p>También demuestra que este criterio sigue una distribución <span class="math inline">\(\chi^2\)</span>, dando así un criterio de comparabilidad. También un valor <strong>P</strong>, con fórmula propia.</p>
@@ -700,7 +787,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <li>Teorema de Neyman Pearson.</li>
 </ul>
 </section></section>
-<section><section id="hipótesis" class="title-slide slide level1" data-background="http://www.cruzjulian.com/backgrounds/025.jpg"><h1>Hipótesis</h1></section><section id="hipótesis-estadística" class="slide level2">
+<section><section id="hipótesis-2" class="title-slide slide level1" data-background="http://www.cruzjulian.com/backgrounds/025.jpg"><h1>Hipótesis</h1></section><section id="hipótesis-estadística" class="slide level2">
 <h2>Hipótesis estadística</h2>
 <p><strong>Afirmación</strong> acerca de uno o más <strong>parámetros</strong>.</p>
 <ul>
@@ -733,24 +820,24 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2>Cola derecha</h2>
 <p><span class="math inline">\(H_0:\mu = \mu_0\)</span> frente a <span class="math inline">\(H_1:\mu &gt; \mu_0\)</span>.</p>
 </section></section>
-<section><section id="estadísticos-de-prueba" class="title-slide slide level1" data-background="http://www.cruzjulian.com/backgrounds/039.jpg"><h1>Estadísticos de prueba</h1></section><section id="estadísticos-de-prueba-1" class="slide level2">
+<section><section id="estadísticos-de-prueba-1" class="title-slide slide level1" data-background="http://www.cruzjulian.com/backgrounds/039.jpg"><h1>Estadísticos de prueba</h1></section><section id="estadísticos-de-prueba-2" class="slide level2">
 <h2>Estadísticos de prueba</h2>
 <p>Cada prueba tiene un estadístico</p>
 <p><span class="math display">\[ T(X) \]</span></p>
-</section><section id="estadísticos-de-prueba-2" class="slide level2">
+</section><section id="estadísticos-de-prueba-3" class="slide level2">
 <h2>Estadísticos de prueba</h2>
 <p>Este estadístico es una variable aleatoria tiene una distribución</p>
 <p><span class="math display">\[ T(X) \sim D(\theta) \]</span></p>
-</section><section id="estadísticos-de-prueba-3" class="slide level2">
+</section><section id="estadísticos-de-prueba-4" class="slide level2">
 <h2>Estadísticos de prueba</h2>
 <p>Esta distribución es <strong>conocida</strong> bajo <span class="math inline">\(H_0\)</span></p>
 <p><span class="math display">\[ F_T(t) = F_0(t) \]</span></p>
-</section><section id="estadísticos-de-prueba-4" class="slide level2">
+</section><section id="estadísticos-de-prueba-5" class="slide level2">
 <h2>Estadísticos de prueba</h2>
 <p>Esta distribución es <strong>desconocida</strong> bajo <span class="math inline">\(H_a\)</span></p>
 <p><span class="math display">\[ F_T(t) \neq F_0(t) \]</span></p>
 </section></section>
-<section><section id="valor-p" class="title-slide slide level1" data-background="http://www.cruzjulian.com/backgrounds/005.jpg"><h1>Valor p</h1></section><section id="qué-es" class="slide level2">
+<section><section id="valor-p-3" class="title-slide slide level1" data-background="http://www.cruzjulian.com/backgrounds/005.jpg"><h1>Valor p</h1></section><section id="qué-es" class="slide level2">
 <h2>¿Qué es?</h2>
 <p>Un p-valor se puede calcular de tres maneras:</p>
 <ul>
@@ -758,7 +845,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <li>Cola derecha: <span class="math inline">\(P = 1 - F_0(T)\)</span></li>
 <li>Dos colas: <span class="math inline">\(P = 2min(F_0(T), 1 - F_0(T))\)</span></li>
 </ul>
-</section><section id="cómo-funciona" class="slide level2">
+</section><section id="cómo-funciona-2" class="slide level2">
 <h2>¿Cómo funciona?</h2>
 <p>Esta definición garantiza que:</p>
 <ul>
@@ -843,7 +930,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <li><p><span class="math inline">\(p &gt; \alpha\)</span> <strong>no</strong> se rechaza <span class="math inline">\(H_0\)</span>, pero tampoco se <em>acepta</em>. De manera que no se realizan afirmaciones sobre la población y el alcance del estudio es muestral.</p></li>
 </ul>
 </section></section>
-<section><section id="tipos-de-error" class="title-slide slide level1" data-background="http://www.cruzjulian.com/backgrounds/031.jpg"><h1>Tipos de error</h1></section><section id="error-tipo-1" class="slide level2">
+<section><section id="tipos-de-error-1" class="title-slide slide level1" data-background="http://www.cruzjulian.com/backgrounds/031.jpg"><h1>Tipos de error</h1></section><section id="error-tipo-1" class="slide level2">
 <h2>Error tipo 1</h2>
 <p>Falsos positivos: <strong>rechazar</strong> la hipótesis nula cuando ésta es cierta.</p>
 <p>La probabilidad de que suceda es <span class="math inline">\(\alpha\)</span></p>
@@ -1000,26 +1087,26 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </section></section>
 <section><section id="código" class="title-slide slide level1"><h1>Código</h1></section><section id="matriz-de-distancias-ejemplo-1" class="slide level2">
 <h2>Matriz de distancias ejemplo (1)</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(<span class="st">&quot;tibble&quot;</span>)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(<span class="st">&quot;ggplot2&quot;</span>)</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">library</span>(<span class="st">&quot;dplyr&quot;</span>)</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw">library</span>(<span class="st">&quot;knitr&quot;</span>)</a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="kw">tibble</span>(</a>
-<a class="sourceLine" id="cb1-7" data-line-number="7">  <span class="dt">x_value =</span> <span class="kw">rnorm</span>(<span class="dv">5</span>),</a>
-<a class="sourceLine" id="cb1-8" data-line-number="8">  <span class="dt">y_value =</span> <span class="kw">runif</span>(<span class="dv">5</span>)      </a>
-<a class="sourceLine" id="cb1-9" data-line-number="9">) -&gt;<span class="st"> </span>exampol</a>
-<a class="sourceLine" id="cb1-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb1-11" data-line-number="11">exampol <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="st">  </span>ggplot <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1-13" data-line-number="13"><span class="st">  </span><span class="kw">aes</span>(<span class="dt">x =</span> x_value, <span class="dt">y =</span> y_value) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1-14" data-line-number="14"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_light</span>() -&gt;<span class="st"> </span>plot_points</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(<span class="st">&quot;tibble&quot;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(<span class="st">&quot;ggplot2&quot;</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">library</span>(<span class="st">&quot;dplyr&quot;</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">library</span>(<span class="st">&quot;knitr&quot;</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="kw">tibble</span>(</span>
+<span id="cb1-7"><a href="#cb1-7"></a>  <span class="dt">x_value =</span> <span class="kw">rnorm</span>(<span class="dv">5</span>),</span>
+<span id="cb1-8"><a href="#cb1-8"></a>  <span class="dt">y_value =</span> <span class="kw">runif</span>(<span class="dv">5</span>)      </span>
+<span id="cb1-9"><a href="#cb1-9"></a>) -&gt;<span class="st"> </span>exampol</span>
+<span id="cb1-10"><a href="#cb1-10"></a></span>
+<span id="cb1-11"><a href="#cb1-11"></a>exampol <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="st">  </span>ggplot <span class="op">+</span><span class="st"> </span></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="st">  </span><span class="kw">aes</span>(<span class="dt">x =</span> x_value, <span class="dt">y =</span> y_value) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_light</span>() -&gt;<span class="st"> </span>plot_points</span></code></pre></div>
 </section><section id="matriz-de-distancias-ejemplo-2" class="slide level2">
 <h2>Matriz de distancias ejemplo (2)</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">exampol <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="st">  </span>dist <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="st">  </span>as.matrix <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="st">  </span><span class="kw">as_tibble</span>(<span class="dt">rownames =</span> <span class="st">&quot;ind&quot;</span>) -&gt;<span class="st"> </span>table_points</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>exampol <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="st">  </span>dist <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="st">  </span>as.matrix <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="st">  </span><span class="kw">as_tibble</span>(<span class="dt">rownames =</span> <span class="st">&quot;ind&quot;</span>) -&gt;<span class="st"> </span>table_points</span></code></pre></div>
 </section><section id="matriz-de-distancias-ejemplo-3" class="slide level2">
 <h2>Matriz de distancias ejemplo (3)</h2>
 <p><img src="default_presentation_files/figure-revealjs/unnamed-chunk-1-1.png" width="768" /></p>
@@ -1040,41 +1127,41 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <tr class="odd">
 <td style="text-align: left;">1</td>
 <td style="text-align: right;">0.00</td>
-<td style="text-align: right;">0.93</td>
-<td style="text-align: right;">0.84</td>
-<td style="text-align: right;">0.16</td>
-<td style="text-align: right;">0.41</td>
+<td style="text-align: right;">0.59</td>
+<td style="text-align: right;">0.69</td>
+<td style="text-align: right;">1.42</td>
+<td style="text-align: right;">2.01</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2</td>
-<td style="text-align: right;">0.93</td>
+<td style="text-align: right;">0.59</td>
 <td style="text-align: right;">0.00</td>
-<td style="text-align: right;">0.62</td>
-<td style="text-align: right;">1.04</td>
-<td style="text-align: right;">0.63</td>
+<td style="text-align: right;">0.74</td>
+<td style="text-align: right;">1.88</td>
+<td style="text-align: right;">2.31</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">3</td>
-<td style="text-align: right;">0.84</td>
-<td style="text-align: right;">0.62</td>
+<td style="text-align: right;">0.69</td>
+<td style="text-align: right;">0.74</td>
 <td style="text-align: right;">0.00</td>
-<td style="text-align: right;">0.85</td>
-<td style="text-align: right;">0.83</td>
+<td style="text-align: right;">2.08</td>
+<td style="text-align: right;">2.70</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">4</td>
-<td style="text-align: right;">0.16</td>
-<td style="text-align: right;">1.04</td>
-<td style="text-align: right;">0.85</td>
+<td style="text-align: right;">1.42</td>
+<td style="text-align: right;">1.88</td>
+<td style="text-align: right;">2.08</td>
 <td style="text-align: right;">0.00</td>
-<td style="text-align: right;">0.57</td>
+<td style="text-align: right;">0.81</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">5</td>
-<td style="text-align: right;">0.41</td>
-<td style="text-align: right;">0.63</td>
-<td style="text-align: right;">0.83</td>
-<td style="text-align: right;">0.57</td>
+<td style="text-align: right;">2.01</td>
+<td style="text-align: right;">2.31</td>
+<td style="text-align: right;">2.70</td>
+<td style="text-align: right;">0.81</td>
 <td style="text-align: right;">0.00</td>
 </tr>
 </tbody>
@@ -1097,41 +1184,41 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <tr class="odd">
 <td style="text-align: left;">1</td>
 <td style="text-align: right;">0.00</td>
-<td style="text-align: right;">0.93</td>
-<td style="text-align: right;">0.84</td>
-<td style="text-align: right;">0.16</td>
-<td style="text-align: right;">0.41</td>
+<td style="text-align: right;">0.59</td>
+<td style="text-align: right;">0.69</td>
+<td style="text-align: right;">1.42</td>
+<td style="text-align: right;">2.01</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2</td>
-<td style="text-align: right;">0.93</td>
+<td style="text-align: right;">0.59</td>
 <td style="text-align: right;">0.00</td>
-<td style="text-align: right;">0.62</td>
-<td style="text-align: right;">1.04</td>
-<td style="text-align: right;">0.63</td>
+<td style="text-align: right;">0.74</td>
+<td style="text-align: right;">1.88</td>
+<td style="text-align: right;">2.31</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">3</td>
-<td style="text-align: right;">0.84</td>
-<td style="text-align: right;">0.62</td>
+<td style="text-align: right;">0.69</td>
+<td style="text-align: right;">0.74</td>
 <td style="text-align: right;">0.00</td>
-<td style="text-align: right;">0.85</td>
-<td style="text-align: right;">0.83</td>
+<td style="text-align: right;">2.08</td>
+<td style="text-align: right;">2.70</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">4</td>
-<td style="text-align: right;">0.16</td>
-<td style="text-align: right;">1.04</td>
-<td style="text-align: right;">0.85</td>
+<td style="text-align: right;">1.42</td>
+<td style="text-align: right;">1.88</td>
+<td style="text-align: right;">2.08</td>
 <td style="text-align: right;">0.00</td>
-<td style="text-align: right;">0.57</td>
+<td style="text-align: right;">0.81</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">5</td>
-<td style="text-align: right;">0.41</td>
-<td style="text-align: right;">0.63</td>
-<td style="text-align: right;">0.83</td>
-<td style="text-align: right;">0.57</td>
+<td style="text-align: right;">2.01</td>
+<td style="text-align: right;">2.31</td>
+<td style="text-align: right;">2.70</td>
+<td style="text-align: right;">0.81</td>
 <td style="text-align: right;">0.00</td>
 </tr>
 </tbody>
